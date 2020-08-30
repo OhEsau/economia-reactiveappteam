@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View,ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
 
-class LoadingScreen extends Component {
+export default class LoadingScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -10,8 +10,6 @@ class LoadingScreen extends Component {
     );
   }
 }
-
-export default LoadingScreen;
 
 const styles = StyleSheet.create({
     container: {
