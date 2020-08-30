@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { 
   StyleSheet, 
   Text,
@@ -8,7 +8,7 @@ import {
   TouchableOpacity 
 } from 'react-native';
 
-export default class Register extends React.Component {
+export default class Register extends Component {
   render() {
     return (
       <View style={styles.regform}>
@@ -39,6 +39,7 @@ export default class Register extends React.Component {
     );
   }
 }
+
 
 const styles = StyleSheet.create({
   regform: {

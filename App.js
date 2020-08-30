@@ -1,8 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, {Component} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Button } from 'react-native';
-import { NavigationContainer, StackActions } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createAppContainer } from 'react-navigation'
+import { createStackNavigator } from 'react-navigation-stack';
 import LoginScreen from './Screen/LoginScreen';
 import LoadingScreen from './Screen/LoadingScreen';
 import RegisterScreen from './Screen/RegisterScreen';
@@ -12,48 +12,42 @@ import { firebaseConfig } from './config';
 
 firebase.initializeApp(firebaseConfig);
 
-const Stack = createStackNavigator();
-
-export default class App extends React.Component{
-  render(){
+export default class HomeScreen extends Component {
+  render() {
+    const { navigate } = this.props.navigation;
     return (
-      <View style={styles.container}>
-        <Text>This is main screen</Text>
-        
-        <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen
-              name="Inicia Sesion"
-              component={LoginScreen}
-             />
-            <Stack.Screen
-              name="Registrate"
-              component={RegisterScreen}
-              />
-          </Stack.Navigator>
-        </NavigationContainer>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Home Screen</Text>
+        <Button
+          title="Go to Register"
+          onPress={() => navigate('RegisterScreen')}
+        />  
       </View>
-    );
-  }
+    )
+  } 
 }
 
-function RegisterrScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Register Screen</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('RegisterScreen')}
-      />
-    </View>
-  );
-}
+const AppNavigator = createStackNavigator({
+  Home: {
+    screen: HomeScreen
+  },
+  Register: {
+    screen: RegisterScreen
+  },
+  Login: {
+    screen: LoginScreen
+  }
+},{
+  initialRouteName: "Home"        
+});
+
+const AppContainer = createAppContainer(AppNavigator);
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    backgroundColor: '#fff',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    justifyContent: 'center',
   },
 });
