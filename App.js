@@ -6,42 +6,26 @@ import { createStackNavigator } from 'react-navigation-stack';
 import LoginScreen from './Screen/LoginScreen';
 import LoadingScreen from './Screen/LoadingScreen';
 import RegisterScreen from './Screen/RegisterScreen';
+import HomeScreen from './Screen/HomeScreen'
 
 import * as firebase from 'firebase';
 import { firebaseConfig } from './config';
 
 firebase.initializeApp(firebaseConfig);
 
-export default class HomeScreen extends Component {
-  render() {
-    const { navigate } = this.props.navigation;
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Home Screen</Text>
-        <Button
-          title="Go to Register"
-          onPress={() => navigate('RegisterScreen')}
-        />  
-      </View>
+const Stack = createStackNavigator();
+
+export default class App extends Component {
+  render(){
+    return(
+      <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="HomeScreen" component={HomeScreen} />        
+      </Stack.Navigator>
+      </NavigationContainer>
     )
-  } 
-}
-
-const AppNavigator = createStackNavigator({
-  Home: {
-    screen: HomeScreen
-  },
-  Register: {
-    screen: RegisterScreen
-  },
-  Login: {
-    screen: LoginScreen
   }
-},{
-  initialRouteName: "Home"        
-});
-
-const AppContainer = createAppContainer(AppNavigator);
+}
 
 const styles = StyleSheet.create({
   container: {
